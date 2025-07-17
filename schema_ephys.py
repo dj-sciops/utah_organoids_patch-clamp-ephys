@@ -6,17 +6,17 @@ import matplotlib.pyplot as plt
 from PIL import Image
 from collections import OrderedDict
 import gc
-from current_clamp import *
-from current_clamp_features import extract_istep_features
-from visualization.feature_annotations import feature_name_dict
-from read_metadata import *
-from file_io import load_current_step
+from .current_clamp import *
+from .current_clamp_features import extract_istep_features
+from .visualization.feature_annotations import feature_name_dict
+from .read_metadata import *
+from .file_io import load_current_step
 # from pymysql import IntegrityError
 import datajoint as dj
 
 from workflow import DB_PREFIX
 
-schema = dj.schema(DB_PREFIX + 'patch_clamp_ephys', locals())
+schema = dj.schema(DB_PREFIX + 'patch_clamp', locals())
 
 FIG_DIR = 'analysis_current_clamp/figures_plot_recording'
 

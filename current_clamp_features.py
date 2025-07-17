@@ -2,8 +2,8 @@ import numpy as np
 import logging
 import six
 from collections import OrderedDict
-from allensdk_0_14_2 import ephys_extractor as efex
-from allensdk_0_14_2 import ephys_features as ft
+from .allensdk_0_14_2 import ephys_extractor as efex
+from .allensdk_0_14_2 import ephys_features as ft
 
 
 def extract_istep_features(data, start, end, subthresh_min_amp = -100, n_subthres_sweeps = 4,

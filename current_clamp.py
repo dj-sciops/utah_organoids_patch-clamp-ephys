@@ -10,7 +10,7 @@ import seaborn as sns
 from matplotlib import gridspec, animation
 from PIL import Image, ImageDraw, ImageFont
 
-import allensdk_0_14_2.ephys_features as ft
+from .allensdk_0_14_2 import ephys_features as ft
 
 # TODO: implement plotting functions under a class object 
 

@@ -1,6 +1,6 @@
 import os, argparse, json
 import pandas as pd
-from visualization.iclamp_app import iclamp_viz
+from .visualization.iclamp_app import iclamp_viz
 #TODO: integrate with datajoint, and fetch data directly from database
 
 if __name__ == '__main__':
