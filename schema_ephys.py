@@ -15,6 +15,7 @@ from .file_io import load_current_step
 import datajoint as dj
 
 from workflow import DB_PREFIX
+from workflow.pipeline import culture
 
 schema = dj.schema(DB_PREFIX + 'patch_clamp', locals())
 
@@ -37,6 +38,7 @@ class EphysExperimentsForAnalysis(dj.Manual):
     project: varchar(128)      # which project the data belongs to
     use: enum('Yes', 'No')      # whether to use this experiment
     directory: varchar(256)     # the parent project directory
+    -> [nullable] culture.Experiment
     """
 
     def insert_experiment(self, excel_file):
