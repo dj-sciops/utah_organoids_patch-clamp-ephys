@@ -14,7 +14,9 @@ from file_io import load_current_step
 # from pymysql import IntegrityError
 import datajoint as dj
 
-schema = dj.schema('yueqi_ephys', locals())
+from workflow import DB_PREFIX
+
+schema = dj.schema(DB_PREFIX + 'patch_clamp_ephys', locals())
 
 FIG_DIR = 'analysis_current_clamp/figures_plot_recording'
 
