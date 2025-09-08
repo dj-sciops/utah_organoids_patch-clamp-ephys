@@ -14,7 +14,7 @@ from .file_io import load_current_step
 # from pymysql import IntegrityError
 import datajoint as dj
 
-from workflow import DB_PREFIX
+from workflow import DB_PREFIX, ORG_NAME, WORKFLOW_NAME
 from workflow.pipeline import culture
 from workflow.utils.paths import get_raw_root_data_dir, get_processed_root_data_dir
 from element_interface.utils import find_full_path
@@ -100,9 +100,12 @@ class Animals(dj.Imported):
         key['id'] = animal_info['id']
         key['strain'] = animal_info['strain']
         if not pd.isnull(animal_info['DOB']): key['dob'] = animal_info['DOB']
-        if not pd.isnull(animal_info['age']): key['age'] = animal_info['age']
+        if 'age' in animal_info.keys():
+            if not pd.isnull(animal_info['age']): key['age'] = animal_info['age']
+        elif 'age, days' in animal_info.keys():
+            if not pd.isnull(animal_info['age, days']): key['age'] = animal_info['age, days']
         key['date'] = animal_info['date']
-        key['slicetype'] = animal_info['type']
+        key['slicetype'] = str(animal_info['type'])
         key['external'] = animal_info['external']
         key['internal'] = animal_info['internal']
         if not pd.isnull(animal_info['comment']): key['animal_comment'] = animal_info['comment']
@@ -141,6 +144,9 @@ class PatchCells(dj.Imported):
             cell_info = parse_cell_info_2017_vertical(metadata)
         else:
             old_file = False
+            # TODO: missing `fill` column
+            if 'fill' not in metadata.columns:
+                metadata['fill'] = 'unknown'
             cell_info = parse_cell_info_2017(metadata)
 
         for i, row in cell_info.iterrows():
@@ -199,7 +205,14 @@ class EphysRecordings(dj.Imported):
         print('Populating for: ', key)
         excel_file = directory / (key['experiment'] + '.xlsx')
         _, metadata = read_ephys_info_from_excel_2017(excel_file)
+
+        # TODO: missing `fill` column and `hold` column
+        if 'protocol' not in metadata.columns:
+            metadata['protocol'] = ''        
         patch_info = parse_patch_info_2017(metadata)
+
+        if 'hold' not in patch_info.columns:
+            patch_info['hold'] = None
 
         for i, row in patch_info.iterrows():
             newkey = {}

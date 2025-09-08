@@ -5,7 +5,7 @@ import pandas as pd
 from collections import OrderedDict
 
 
-def read_ephys_info_from_excel_2017(excel_file, skiprows_animal=1, skiprows_cell=5):
+def read_ephys_info_from_excel_2017(excel_file, skiprows_animal=1, skiprows_cell=6):
     # read Ex and In solutions from the first two lines
     excelname = os.path.basename(excel_file)
     excelname = os.path.splitext(excelname)[0]
