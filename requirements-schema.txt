@@ -32,3 +32,6 @@ tqdm==4.21.0
 traitlets==4.3.2
 urllib3==1.22
 wcwidth==0.1.7
+# Modern patch-clamp libraries (added 2026)
+pyabf>=2.3.0
+ipfx>=2.0.0
