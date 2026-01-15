@@ -35,3 +35,6 @@ traitlets==4.3.2
 urllib3==1.22
 Werkzeug==0.14.1
 xlrd==1.1.0
+# Modern patch-clamp libraries (added 2026)
+pyabf>=2.3.0
+ipfx>=2.0.0

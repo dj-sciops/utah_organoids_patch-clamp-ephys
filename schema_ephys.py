@@ -7,7 +7,7 @@ from PIL import Image
 from collections import OrderedDict
 import gc
 from .current_clamp import *
-from .current_clamp_features import extract_istep_features
+from .ipfx_features import extract_istep_features
 from .visualization.feature_annotations import feature_name_dict
 from .read_metadata import *
 from .file_io import load_current_step
@@ -288,7 +288,7 @@ class CurrentStepTimeParams(dj.Manual):
 @schema
 class FeatureExtractionParams(dj.Lookup):
     definition = """
-    # Parameters for AllenSDK action potential detection algorithm
+    # Parameters for ipfx action potential detection algorithm
     params_id : int        # unique id for parameter set
     ---
     filter = 10 : float              # cutoff frequency for 4-pole low-pass Bessel filter in kHz
