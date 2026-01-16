@@ -17,6 +17,8 @@ def read_ephys_info_from_excel_2017(excel_file, skiprows_animal=1, skiprows_cell
 
     metadata = pd.read_excel(excel_file, skiprows=skiprows_cell).dropna(how='all')
     metadata = metadata[[x for x in metadata.columns if not 'Unnamed' in x]]
+    # Filter out repeated header rows (used for visual separation in Excel)
+    metadata = metadata[metadata['cell'] != 'cell']
     metadata['cell'] = metadata['cell'].fillna(method='ffill')
     if metadata['cell'].dtype == 'float':
         metadata['cell'] = metadata['cell'].astype('int').astype('str')
