@@ -538,9 +538,9 @@ class CurrentStepPlots(dj.Imported):
                                 sag_sweeps = features_1s['sag_sweep_indices'][:1],
                                 save=False, rasterized=False)
 
-        target_folder = os.path.join(parent_directory, 'istep_raw')
-        key['istep_raw_pdf_path'] = os.path.join(target_folder, 'istep_raw_' + rec + '.pdf')
-        fig.savefig(os.path.join(directory, key['istep_raw_pdf_path']), dpi=200)
+        target_folder = fig_dir / 'istep_raw'
+        key['istep_raw_pdf_path'] = target_folder / ('istep_raw_' + rec + '.pdf')
+        fig.savefig(key['istep_raw_pdf_path'], dpi=200)
         plt.show()
         plt.close(fig)
 
